@@ -6,7 +6,7 @@ import json
 
 load_dotenv('../env/.env')
 API_KEY = os.environ.get('API_KEY')
-sleep_duration = 100/120
+sleep_duration = 120/100
 
 tiers = ['IRON', 'BRONZE', 'SILVER', 'GOLD', 'PLATINUM','EMERALD', 'DIAMOND']
 divisions = ['IV', 'III', 'II', 'I']
@@ -14,7 +14,10 @@ divisions = ['IV', 'III', 'II', 'I']
 #regions = ['BR1', 'EUN1', 'EUW1', 'JP1', 'KR', 'LA1', 'LA2', 'NA1',
 #          'OC1', 'PH2', 'RU', 'SG2', 'TH2', 'TR1', 'TW2', 'VN2']
 
-region = 'OC1'
+filename = os.path.basename(__file__)
+split_filename = filename.split('_')
+
+region = split_filename[0]
 queue = 'RANKED_SOLO_5x5'
 pageInt = 1
 
@@ -30,11 +33,11 @@ for tier in tiers:
         for player in players:
             summoners[region][tier][division] = players
 
-for tier in summoners[region][tier]:
-    for division in tier:
-        for summoner in division:
+for tier in summoners[region]:
+    for division in summoners[region][tier]:
+        for summoner in summoners[region][tier][division]:
             time.sleep(sleep_duration)
-
+            print(summoner)
             try:
                 response = requests.get(f'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{summoner["summonerId"]}?api_key={API_KEY}')
                 response.raise_for_status()
