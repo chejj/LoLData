@@ -1,0 +1,186 @@
+{
+    "kr": {
+        "IRON": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "BRONZE": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "SILVER": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "GOLD": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "PLATINUM": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "EMERALD": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        },
+        "DIAMOND": {
+            "IV": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "III": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "II": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            },
+            "I": {
+                "status": {
+                    "message": "Forbidden",
+                    "status_code": 403
+                }
+            }
+        }
+    }
+}
