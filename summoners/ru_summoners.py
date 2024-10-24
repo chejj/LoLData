@@ -30,7 +30,7 @@ for tier in tiers:
         for player in players:
             summoners[region][tier][division] = players
 
-for tier in summoners[region][tiers]:
+for tier in summoners[region][tier]:
     for division in tier:
         for summoner in division:
             time.sleep(sleep_duration)
