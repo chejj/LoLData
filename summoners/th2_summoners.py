@@ -29,9 +29,7 @@ for tier in tiers:
     for division in divisions:
         time.sleep(sleep_duration)
         players = requests.get(f'https://{region}.api.riotgames.com/lol/league/v4/entries/{queue}/{tier}/{division}?page={pageInt}&api_key={API_KEY}').json()
-        summoners[region][tier][division] = {}
-        for player in players:
-            summoners[region][tier][division] = players
+        summoners[region][tier][division] = players
 
 for tier in summoners[region]:
     for division in summoners[region][tier]:
