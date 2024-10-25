@@ -27,39 +27,39 @@ cursor.execute(query)
 results = cursor.fetchall()
 cursor.close()
 
-def map_region(value):
-    region_mapping = {
-        'BR1': 'AMERICAS',
-        'NA1': 'AMERICAS',
-        'LA1': 'AMERICAS',
-        'LA2': 'AMERICAS',
-        'EUN1': 'EUROPE',
-        'EUW1': 'EUROPE',
-        'TR1': 'EUROPE',
-        'RU': 'EUROPE',
-        'KR': 'ASIA',
-        'JP1': 'ASIA',
-        'OC1': 'SEA',
-        'PH2': 'SEA',
-        'SG2': 'SEA',
-        'TH2': 'SEA',
-        'TW2': 'SEA',
-        'VN2': 'SEA'
-    }
-    return region_mapping.get(value, 'UNKNOWN')
+region_mapping = {
+    'br1': 'AMERICAS',
+    'na1': 'AMERICAS',
+    'la1': 'AMERICAS',
+    'la2': 'AMERICAS',
+    'eun1': 'EUROPE',
+    'euw1': 'EUROPE',
+    'tr1': 'EUROPE',
+    'ru': 'EUROPE',
+    'kr': 'ASIA',
+    'jp1': 'ASIA',
+    'oc1': 'SEA',
+    'ph2': 'SEA',
+    'sg2': 'SEA',
+    'th2': 'SEA',
+    'tw2': 'SEA',
+    'vn2': 'SEA'
+}
 
 cursor = conn.cursor()
 
 # October 23, 2024 @ 18:00:00 GMT
-newMapEpoch = 1729706400
+new_patch_epoch = 1729706400
 
 for row in results:
+    print(row)
     region = row[1]
-    api_region = map_region(region)
+    api_region = region_mapping[str(region)]
     tier = row[2]
     division = row[3]
     time.sleep(rate_limit)
-    response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={newMapEpoch}&type=ranked&start=0&count=100&api_key={API_KEY}').json()
+    print(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}')
+    response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}').json()
     for match in response:
         query = f"INSERT INTO matches (matchid, region, tier, division, queried) VALUES (%s, %s, %s, %s, %s)"
         values = (str(match), region, tier, division, False)
