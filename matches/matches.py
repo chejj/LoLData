@@ -4,6 +4,8 @@ import psycopg2
 import requests
 import time
 
+rate_limit = 120/100
+
 load_dotenv('../env/.env')
 API_KEY = os.environ.get("API_KEY")
 db_password = os.environ.get("db_password")
@@ -19,7 +21,7 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
-query = "SELECT puuid, region, tier, division FROM summoners;"
+query = "SELECT puuid, region, tier, division FROM summoners WHERE region = 'na1';"
 cursor.execute(query)
 
 results = cursor.fetchall()
@@ -52,10 +54,12 @@ cursor = conn.cursor()
 newMapEpoch = 1729706400
 
 for row in results:
-    region = map_region(row[1])
+    region = row[1]
+    api_region = map_region(region)
     tier = row[2]
     division = row[3]
-    response = requests.get(f'https://{region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={newMapEpoch}&type=ranked&start=0&count=100&api_key={API_KEY}').json()
+    time.sleep(rate_limit)
+    response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={newMapEpoch}&type=ranked&start=0&count=100&api_key={API_KEY}').json()
     for match in response:
         query = f"INSERT INTO matches (matchid, region, tier, division, queried) VALUES (%s, %s, %s, %s, %s)"
         values = (str(match), region, tier, division, False)
