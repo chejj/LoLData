@@ -71,6 +71,8 @@ for row in results:
         response = response.json()
     except:
         print(f"An error occurred: {e}")
+        time.sleep (300)
+        continue
     
     for match in response:
         query = f"INSERT INTO matches (matchid, region, tier, division, queried) VALUES (%s, %s, %s, %s, %s)"
