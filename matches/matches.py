@@ -85,18 +85,3 @@ for row in results:
 
 cursor.close()
 conn.close()
-
-# try:
-#                 response = requests.get(f'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{summoner["summonerId"]}?api_key={API_KEY}')
-#                 response.raise_for_status()
-#                 summoner['puuid'] = response.json().get('puuid')
-#             except requests.exceptions.HTTPError as e:
-
-#                 print(f"HTTP error occurred: {e}")
-#                 time.sleep(130)
-#                 response = requests.get(f'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{summoner["summonerId"]}?api_key={API_KEY}')
-#                 response.raise_for_status()
-#                 summoner['puuid'] = response.json().get('puuid')
-
-#             except Exception as e:
-#                 print(f"An error occurred: {e}")
