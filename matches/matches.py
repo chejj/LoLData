@@ -58,16 +58,26 @@ for row in results:
     tier = row[2]
     division = row[3]
     time.sleep(rate_limit)
-    print(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}')
-    response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}').json()
+
+    try:    
+        response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}')
+        response.raise_for_status
+        response = response.json()
+    except requests.exceptions.HTTPError as e:
+        print(f"HTTP error occurred: {e}")
+        time.sleep(130)
+        response = requests.get(f'https://{api_region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{row[0]}/ids?startTime={new_patch_epoch}&type=ranked&start=0&count=100&api_key={API_KEY}')
+        response.raise_for_status()
+        response = response.json()
+    except:
+        print(f"An error occurred: {e}")
+    
     for match in response:
         query = f"INSERT INTO matches (matchid, region, tier, division, queried) VALUES (%s, %s, %s, %s, %s)"
         values = (str(match), region, tier, division, False)
         try:
             cursor.execute(query, values)
-
             conn.commit()
-                
             print("Data inserted successfully.")
         except (Exception, psycopg2.Error) as error:
             conn.rollback()
@@ -75,3 +85,18 @@ for row in results:
 
 cursor.close()
 conn.close()
+
+# try:
+#                 response = requests.get(f'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{summoner["summonerId"]}?api_key={API_KEY}')
+#                 response.raise_for_status()
+#                 summoner['puuid'] = response.json().get('puuid')
+#             except requests.exceptions.HTTPError as e:
+
+#                 print(f"HTTP error occurred: {e}")
+#                 time.sleep(130)
+#                 response = requests.get(f'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{summoner["summonerId"]}?api_key={API_KEY}')
+#                 response.raise_for_status()
+#                 summoner['puuid'] = response.json().get('puuid')
+
+#             except Exception as e:
+#                 print(f"An error occurred: {e}")
